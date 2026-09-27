@@ -4,6 +4,8 @@
 
 A clean, open-source Chrome extension that bypasses LinkedIn Learning's video-progress tracking — mark videos and readings as complete instantly, without sitting through them or leaving a tab playing in the background.
 
+![Image Alt](https://github.com/chrollovale/wtf-linkedin-learning/blob/426a76ee6794278d921e7d492245f072b1738e8f/Preview.jpeg)
+
 ## Features
 
 - Instantly registers the current video as watched
@@ -15,6 +17,8 @@ A clean, open-source Chrome extension that bypasses LinkedIn Learning's video-pr
 ## Known Limitations
 
 Quizzes and a few other popup types can still appear. You don't need to interact with them, though — they auto-redirect into the next video on their own, so the course still completes without you touching anything.
+
+![Image Alt](https://github.com/chrollovale/wtf-linkedin-learning/blob/426a76ee6794278d921e7d492245f072b1738e8f/Preview2.jpeg)
 
 ## Installation
 
