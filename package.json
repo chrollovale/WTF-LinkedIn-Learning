@@ -1,0 +1,14 @@
+{
+  "name": "wtf-linkedin-learning",
+  "version": "1.1.0",
+  "description": "LinkedIn Learning bypass extension with 16x speed lock and quality control.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0",
+    "fs-extra": "^11.2.0"
+  }
+}

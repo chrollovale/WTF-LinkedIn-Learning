@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WTF LinkedIn Learning</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --paper: #fdfcf8;
+      --ink: #16140f;
+      --ink-soft: #726d61;
+
+      --border: #16140f;
+      --shadow: 4px 4px 0 var(--border);
+      --shadow-sm: 2px 2px 0 var(--border);
+
+      --accent: #ff5a36;
+      --accent-2: #ffcf4d;
+
+      --success: #2f6f4e;
+      --success-bg: #eaf3ec;
+
+      --error: #b3392a;
+      --error-bg: #fbebe7;
+    }
+
+    body {
+      width: 360px;
+      margin: 0;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--ink);
+      background: var(--bg);
+      background-image:
+        linear-gradient(rgba(0,0,0,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.045) 1px, transparent 1px);
+      background-size: 18px 18px;
+      min-height: 400px;
+      overflow-x: hidden;
+    }
+
+    .shell {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+      padding-bottom: 14px;
+      border-bottom: 2px dashed var(--border);
+    }
+
+    .logo-container {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-container svg {
+      width: 19px;
+      height: 19px;
+      fill: var(--ink);
+    }
+
+    .header-text h1 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .header-text p {
+      margin: 3px 0 0;
+      font-size: 10px;
+      color: var(--ink-soft);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status-card {
+      background: var(--paper);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .status-header {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--ink);
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .status-header::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-2);
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(22,20,15,0.2);
+    }
+    .status-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .status-label {
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .status-val {
+      font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--ink);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .status-val.highlight {
+      color: var(--ink);
+      background: var(--accent-2);
+      border-color: var(--border);
+    }
+
+    .alert {
+      padding: 12px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      display: none;
+      line-height: 1.4;
+      animation: slideDown 0.2s ease;
+    }
+
+    .btn {
+      width: 100%;
+      border: 2px solid var(--border);
+      padding: 12px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      position: relative;
+      background: var(--bg);
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--border);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--border);
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-magic {
+      background: var(--accent-2);
+      color: var(--ink);
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .spinner {
+      display: none;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .btn-magic .spinner {
+      border: 2px solid rgba(22,20,15,0.2);
+      border-top-color: var(--ink);
+    }
+
+    .btn.loading .spinner {
+      display: block;
+    }
+    .btn.loading .btn-icon {
+      display: none;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 26px 18px;
+      color: var(--ink-soft);
+      border: 2px dashed var(--border);
+      border-radius: 6px;
+      background: var(--paper);
+    }
+    .empty-state svg {
+      width: 40px;
+      height: 40px;
+      fill: rgba(22,20,15,0.18);
+      margin-bottom: 10px;
+    }
+    .empty-state p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 10px;
+      color: var(--ink-soft);
+      margin-top: 2px;
+      padding-top: 12px;
+      border-top: 2px dashed var(--border);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <div class="header">
+      <div class="logo-container">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+      </div>
+      <div class="header-text">
+        <h1>WTF LinkedIn</h1>
+        <p>Aniket: Dear LinkedIn Learning, what the fuck?</p>
+      </div>
+    </div>
+
+    <div id="result-alert" class="alert"></div>
+
+    <div id="page-status" class="status-card" style="display: none;">
+      <div class="status-header">TELEMETRY SCAN</div>
+      <div class="status-row">
+        <span class="status-label">Video State</span>
+        <span class="status-val highlight" id="lbl-status">Ready</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Playhead Time</span>
+        <span class="status-val" id="lbl-time">0s</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Playback Status</span>
+        <span class="status-val" id="lbl-playing">Paused</span>
+      </div>
+    </div>
+
+    <div id="empty-msg" class="empty-state" style="display: none;">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+      <p>Open a LinkedIn Learning course/video page to start bypassing.</p>
+    </div>
+
+    <div class="actions" id="action-buttons" style="display: none;">
+      <button id="btn-set-video" class="btn btn-primary" style="margin-bottom: 10px;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <div class="spinner"></div>
+        <span class="btn-text">Initialize Video</span>
+      </button>
+
+      <button id="btn-start-bypass" class="btn btn-magic">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <div class="spinner"></div>
+        <span class="btn-text">Start Bypass</span>
+      </button>
+    </div>
+
+    <div class="footer">
+      Note: Only works on active LinkedIn Learning video streams.
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
