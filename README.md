@@ -1,10 +1,17 @@
 # WTF LinkedIn Learning
 
+[![Release](https://img.shields.io/github/v/release/chrollovale/WTF-LinkedIn-Learning?style=flat-square&color=38bdf8)](https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest)
+[![Manifest V3](https://img.shields.io/badge/Manifest-V3-34A853?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Browser](https://img.shields.io/badge/Chromium-Chrome%20%7C%20Edge%20%7C%20Brave-4285F4?style=flat-square)](https://github.com/chrollovale/WTF-LinkedIn-Learning)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
+
+<a href="https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest"><b>📥 Download WTF-LinkedIn-Learning Extension (.zip)</b></a>
+
 > Built by Aniket — "Dear LinkedIn Learning, what the fuck?"
 
 A clean, open-source Chrome extension that bypasses LinkedIn Learning's video-progress tracking — mark videos and readings as complete instantly, without sitting through them or leaving a tab playing in the background.
 
-![Image Alt](https://github.com/chrollovale/wtf-linkedin-learning/blob/426a76ee6794278d921e7d492245f072b1738e8f/Preview.jpeg)
+![Image Alt](./Preview.jpeg)
 
 ## Features
 
@@ -18,7 +25,7 @@ A clean, open-source Chrome extension that bypasses LinkedIn Learning's video-pr
 
 Quizzes and a few other popup types can still appear. You don't need to interact with them, though — they auto-redirect into the next video on their own, so the course still completes without you touching anything.
 
-![Image Alt](https://github.com/chrollovale/wtf-linkedin-learning/blob/426a76ee6794278d921e7d492245f072b1738e8f/Preview2.jpeg)
+![Image Alt](./Preview2.jpeg)
 
 ## Installation
 
@@ -95,3 +102,8 @@ This project is shared for educational purposes. Using it likely violates Linked
 ## License
 
 No license has been specified for this repository yet.
+
+---
+
+### ⭐ Support the Project
+If this tool saved you hours or helped complete your coursework, please consider giving it a **Star** on GitHub!
