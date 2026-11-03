@@ -1,109 +1,87 @@
-# WTF LinkedIn Learning
+<div align="center">
+  <img src="icon/icon128.png" width="100" height="100" alt="WTF LinkedIn Learning Icon" />
+  <h1>WTF LinkedIn Learning</h1>
+  <p><b>Video tracking automation and dialog auto-dismissal for LinkedIn Learning</b></p>
 
-[![Release](https://img.shields.io/github/v/release/chrollovale/WTF-LinkedIn-Learning?style=flat-square&color=38bdf8)](https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest)
-[![Manifest V3](https://img.shields.io/badge/Manifest-V3-34A853?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Browser](https://img.shields.io/badge/Chromium-Chrome%20%7C%20Edge%20%7C%20Brave-4285F4?style=flat-square)](https://github.com/chrollovale/WTF-LinkedIn-Learning)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
+  [![Release](https://img.shields.io/github/v/release/chrollovale/WTF-LinkedIn-Learning?style=flat-square&color=38bdf8)](https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest)
+  [![Manifest V3](https://img.shields.io/badge/Manifest-V3-34A853?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+  [![Browser](https://img.shields.io/badge/Chromium-Chrome%20%7C%20Edge%20%7C%20Brave-4285F4?style=flat-square)](https://github.com/chrollovale/WTF-LinkedIn-Learning)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
-<a href="https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest"><b>📥 Download WTF-LinkedIn-Learning Extension (.zip)</b></a>
+  <br />
+  <a href="https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest"><b>📥 Download WTF-LinkedIn-Learning Extension (.zip)</b></a>
+</div>
 
-> Built by Aniket — "Dear LinkedIn Learning, what the fuck?"
+---
 
-A clean, open-source Chrome extension that bypasses LinkedIn Learning's video-progress tracking — mark videos and readings as complete instantly, without sitting through them or leaving a tab playing in the background.
+A clean, open-source Chrome extension that automates LinkedIn Learning video tracking — mark videos and readings as complete instantly without sitting through them or leaving a tab playing in the background.
 
-![Image Alt](./Preview.jpeg)
+<p align="center">
+  <img src="./Preview.jpeg" alt="WTF LinkedIn Learning Preview" width="80%" />
+</p>
+
+---
 
 ## Features
 
-- Instantly registers the current video as watched
-- Automatically dismisses popups that would otherwise need human attention (e.g. "are you still watching?" prompts)
-- Live telemetry panel (playhead time, playback state) in the popup
-- No background tabs left running
-- Manifest V3 — works on Chrome, Edge, Brave, and other Chromium browsers
+- **Instant Completion:** Instantly registers the current video as watched.
+- **Auto-Dismiss:** Automatically dismisses popups that would otherwise interrupt playback ("are you still watching?" prompts).
+- **Telemetry HUD:** Live status panel (playhead time, playback state) in the popup.
+- **Resource Friendly:** No background tabs left running.
+- **Manifest V3:** Works across Chrome, Edge, Brave, Arc, and all Chromium browsers.
+
+---
 
 ## Known Limitations
 
 Quizzes and a few other popup types can still appear. You don't need to interact with them, though — they auto-redirect into the next video on their own, so the course still completes without you touching anything.
 
-![Image Alt](./Preview2.jpeg)
+<p align="center">
+  <img src="./Preview2.jpeg" alt="Extension In Action" width="80%" />
+</p>
+
+---
 
 ## Installation
 
-Pick whichever fits you:
-
-| | Quick Install | Build from Source |
-|---|---|---|
-| Best for | Just want to use it | Want to read/modify the code first |
-| Requires | Nothing extra | Node.js + npm |
-| Result | Uses the prebuilt `dist/` folder as-is | Regenerates a fresh `dist/` yourself |
-
-### Option A — Quick Install (uses the prebuilt `dist/` folder)
-
-1. Click the green **Code** button above → **Download ZIP**.
-2. Unzip the downloaded file.
-3. In Chrome, go to `chrome://extensions`.
+### Quick Install (Prebuilt)
+1. Download **[wtf-linkedin-learning-v1.1.0.zip](https://github.com/chrollovale/WTF-LinkedIn-Learning/releases/latest)**.
+2. Unzip the file.
+3. In Chrome, navigate to `chrome://extensions`.
 4. Turn on **Developer mode** (top-right toggle).
-5. Click **Load unpacked** and select the `dist` folder from inside the unzipped project — not the outer project folder.
-6. The extension icon should now show up in your toolbar.
+5. Click **Load unpacked** and select the unzipped folder.
 
-### Option B — Build from Source
-
-Use this if you'd rather compile the extension yourself rather than trust the committed `dist/` folder.
-
-**Prerequisites:** [Node.js](https://nodejs.org) (includes npm).
-
+### Build from Source
 ```bash
-git clone https://github.com/chrollovale/wtf-linkedin-learning.git
-cd wtf-linkedin-learning
+git clone https://github.com/chrollovale/WTF-LinkedIn-Learning.git
+cd WTF-LinkedIn-Learning
 npm install
 node build.js
 ```
+Load the generated `dist/` folder via `chrome://extensions`.
 
-This bundles `src/` into a fresh `dist/` folder. Then follow steps 3–6 from Option A, loading your newly built `dist` folder instead.
+---
 
 ## Usage
 
-1. Open a LinkedIn Learning course or video page.
+1. Open any LinkedIn Learning course or video page.
 2. Click the extension icon in your toolbar.
-3. Click **Initialize Video** to detect the current player.
+3. Click **Initialize Video** to detect the active player.
 4. Click **Start Bypass**.
 
-## How It Works
-
-Once bypass mode is switched on, the injected script takes over the page's own video player:
-
-- **Playback speed** is pinned to a fixed, very high rate regardless of what LinkedIn's own player tries to set.
-- **Video quality** is automatically dropped to the lowest available resolution to avoid buffering delays.
-- **Interruption popups** — "Skip," "Continue," "Skip survey," "Next video," and similar prompts — are detected and dismissed automatically so playback isn't interrupted.
-- Once a video ends, the player's **"Next" control** is triggered automatically to advance to the next lesson.
-- If playback stalls, the script **nudges the timeline forward** instead of waiting for the video to buffer.
-- The script periodically **signals normal playback progress** to the page so LinkedIn's tracking registers the video as being watched.
-- Audio is muted for the duration, and the popup UI starts/stops the bypass on the active tab.
-
-See [Known Limitations](#known-limitations) above for what this doesn't cover.
-
-## Project Structure
-
-```
-├── build.js         # esbuild bundler + static file copier
-├── manifest.json    # Extension manifest (source)
-├── package.json
-├── src/
-│   ├── entries/     # content-bridge.js, inject-entry.js
-│   └── ui/popup/    # popup.html, popup.js
-├── icon/            # Icons + source logo.svg
-└── dist/            # Prebuilt, ready-to-load extension (Option A)
-```
+---
 
 ## Disclaimer
 
-This project is shared for educational purposes. Using it likely violates LinkedIn Learning's Terms of Service, and if your courses are assigned by an employer or school, bypassing them may carry consequences beyond LinkedIn itself. Use at your own risk.
+This project is shared for educational purposes. Using it may violate LinkedIn Learning's Terms of Service. Use at your own risk.
+
+---
 
 ## License
 
-No license has been specified for this repository yet.
+MIT License. See [LICENSE](./LICENSE) for details.
 
 ---
 
 ### ⭐ Support the Project
-If this tool saved you hours or helped complete your coursework, please consider giving it a **Star** on GitHub!
+If this tool saved you hours or helped complete your learning goals, please consider giving it a **Star** on GitHub!
